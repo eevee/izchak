@@ -1,0 +1,11 @@
+# vim cruft
+*.sw*
+
+# python cruft
+*.pyc
+*.pyo
+
+# pylons cruft
+/*.db
+/*.egg-info
+/data
