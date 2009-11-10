@@ -1,0 +1,3 @@
+include nethack/config/deployment.ini_tmpl
+recursive-include nethack/public *
+recursive-include nethack/templates *
