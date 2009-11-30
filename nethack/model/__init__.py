@@ -35,6 +35,7 @@ class DungeonBranch(Entity):
     name = Field(Unicode(32))
 
 class EndType(Entity):
+    """Identifies how a game ended: by quit, escape, death, or ascension."""
     identifier = Field(Unicode(16))
 
 class Gender(EntityPlusAbbreviation):
@@ -73,29 +74,32 @@ class Player(Entity):
 
 ### Tables populated by NetHack logs
 class Game(Entity):
+    start_time      = Field(DateTime)
+    end_time        = Field(DateTime)
+    real_time       = Field(Interval)
+
     points          = Field(Integer)
+    turns           = Field(Integer)
     final_dlvl      = Field(Integer)
     final_dungeon   = ManyToOne('DungeonBranch')
     deepest_dlvl    = Field(Integer)
     final_hp        = Field(Integer)
     max_hp          = Field(Integer)
     deaths          = Field(Integer)
-    start_time      = Field(DateTime)
-    end_time        = Field(DateTime)
+
+    player          = ManyToOne('Player')
     role            = ManyToOne('Role')
     race            = ManyToOne('Race')
     gender          = ManyToOne('Gender')
     alignment       = ManyToOne('Alignment')
     final_gender    = ManyToOne('Gender')
     final_alignment = ManyToOne('Alignment')
-    player          = ManyToOne('Player')
-    turns           = Field(Integer)
-    real_time       = Field(Interval)
+
     end_type        = ManyToOne('EndType')
-    end_reason      = Field(Unicode(256))
-    end_killer      = Field(Unicode(256), nullable=True)
-    end_killer_name = Field(Unicode(256), nullable=True)
-    end_helpless    = Field(Unicode(256), nullable=True)
+    epitaph         = Field(Unicode(256))
+    # This is the epitaph with any cruft (like 'while helpless') removed, to
+    # make grouping by end reason simpler
+    epitaph_simple  = Field(Unicode(256), index=True)
 
     conducts        = ManyToMany('Conduct')
     milestones      = ManyToMany('Milestone')

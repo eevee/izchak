@@ -21,4 +21,6 @@ def make_map():
     map.connect('/players', controller='players', action='list')
     map.connect('/players/{name}', controller='players', action='view')
 
+    map.connect('/games', controller='games', action='list')
+
     return map

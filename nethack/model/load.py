@@ -8,6 +8,7 @@ nethack_playground = '/opt/nethack.veekun.com/nethack/var'
 
 from datetime import datetime, timedelta
 import os.path
+import re
 
 import elixir
 from sqlalchemy import create_engine, func
@@ -30,34 +31,27 @@ for line in open(os.path.join(nethack_playground, 'xlogfile')):
     if int(logdata['uid']) != 5:
         continue
 
-    end_reason = logdata['death']
-    # Death reasons look like:
-    # "quit"
-    # "escaped"
-    # "ascended"
-    # killed by {end_killer} called {end_killer_name}, while {end_helpless}
-    end_killer = None
-    end_killer_name = None
-    end_helpless = None
-    if end_reason == 'quit':
+    epitaph = logdata['death']
+    epitaph_simple = epitaph
+
+    if epitaph == 'quit':
         end_type = EndType.query.filter_by(identifier=u'quit').one()
-    elif end_reason == 'escaped':
+    elif epitaph == 'escaped':
         end_type = EndType.query.filter_by(identifier=u'escape').one()
-    elif end_reason == 'ascended':
+    elif epitaph == 'ascended':
         end_type = EndType.query.filter_by(identifier=u'ascension').one()
     else:
         end_type = EndType.query.filter_by(identifier=u'death').one()
 
-        # Lop off "killed by " -- 10 characters
-        temp_reason = end_reason[10:]
-        if ', while ' in temp_reason:
-            temp_reason, end_helpless = temp_reason.rsplit(', while ', 1)
-
-        if ' called ' in temp_reason:
-            temp_reason, end_killer_name = temp_reason.split(' called ', 1)
-
-        end_killer = temp_reason
-
+        epitaph_simple = re.sub(' \(with the Amulet\)$', '', epitaph_simple)
+        epitaph_simple = re.sub(', while (.+?)$', '', epitaph_simple)
+        epitaph_simple = re.sub(' called (.+?)$', '', epitaph_simple)
+        epitaph_simple = re.sub(' named (.+?)$', '', epitaph_simple)
+        epitaph_simple = re.sub(' invisible ', ' ', epitaph_simple)
+        epitaph_simple = re.sub(' hallucinogen-distorted ', ' ', epitaph_simple)
+        epitaph_simple = re.sub('by (.+?), the shopkeeper', 'by a shopkeeper', epitaph_simple)
+        epitaph_simple = re.sub(' (him|her)self ', ' him/herself ', epitaph_simple)
+        epitaph_simple = re.sub(' (his|her) ', ' his/her ', epitaph_simple)
 
     game = Game(
         start_time      = datetime.fromtimestamp(int(logdata['starttime'])),
@@ -90,10 +84,8 @@ for line in open(os.path.join(nethack_playground, 'xlogfile')):
                             abbreviation=logdata['align']).one(),
 
         end_type        = end_type,
-        end_reason      = logdata['death'],
-        end_killer      = end_killer,
-        end_killer_name = end_killer_name,
-        end_helpless    = end_helpless,
+        epitaph         = epitaph,
+        epitaph_simple  = epitaph_simple,
     )
 
     conduct_bitfield = int(logdata['conduct'], 16)

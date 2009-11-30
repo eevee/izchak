@@ -58,6 +58,8 @@ def setup_app(command, conf, vars):
     model.EndType(identifier='quit')
     model.EndType(identifier='escape')
     model.EndType(identifier='ascension')
+    model.EndType(identifier='trickery')
+    model.EndType(identifier='panic')
 
     # Conducts taken from src/topten.c
     model.Conduct(flag_value=0x00001, identifier='foodless',
