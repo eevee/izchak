@@ -45,14 +45,22 @@ def setup_app(command, conf, vars):
     model.Alignment(name='Chaotic')
 
     # Dungeon branches, taken from dat/dungeon.def and parsexlog.pl
-    model.DungeonBranch(dnum=0, name='the Dungeons of Doom')
-    model.DungeonBranch(dnum=1, name='Gehennom')
-    model.DungeonBranch(dnum=2, name='the Gnomish Mines')
-    model.DungeonBranch(dnum=3, name='the Quest')
-    model.DungeonBranch(dnum=4, name='Sokoban')
-    model.DungeonBranch(dnum=5, name='Fort Ludios')
-    model.DungeonBranch(dnum=6, name="Vlad's Tower")
-    model.DungeonBranch(dnum=7, name='the Elemental Planes')
+    model.DungeonBranch(dnum=0, short_name='dungeon',
+                                name='the Dungeons of Doom')
+    model.DungeonBranch(dnum=1, short_name='Gehennom',
+                                name='Gehennom')
+    model.DungeonBranch(dnum=2, short_name='Mines',
+                                name='the Gnomish Mines')
+    model.DungeonBranch(dnum=3, short_name='Quest',
+                                name='the Quest')
+    model.DungeonBranch(dnum=4, short_name='Sokoban',
+                                name='Sokoban')
+    model.DungeonBranch(dnum=5, short_name='Ludios',
+                                name='Fort Ludios')
+    model.DungeonBranch(dnum=6, short_name='Vlad',
+                                name="Vlad's Tower")
+    model.DungeonBranch(dnum=7, short_name='Planes',
+                                name='the Elemental Planes')
 
     model.EndType(identifier='death')
     model.EndType(identifier='quit')

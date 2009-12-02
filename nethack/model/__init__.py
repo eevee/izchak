@@ -32,6 +32,7 @@ class EntityPlusAbbreviation(EntityBase):
 
 class DungeonBranch(Entity):
     dnum = Field(Integer)
+    short_name = Field(Unicode(8))
     name = Field(Unicode(32))
 
 class EndType(Entity):
