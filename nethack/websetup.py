@@ -6,6 +6,7 @@ import elixir
 
 from nethack import model
 from nethack.config.environment import load_environment
+import nethack.model.load
 
 log = logging.getLogger(__name__)
 
@@ -139,5 +140,8 @@ def setup_app(command, conf, vars):
     ### Less hard-coded things not taken directly from the game
     for name in os.listdir('/opt/nethack.veekun.com/dgldir/userdata'):
         model.Player(name=name)
+
+    ### Load all the current game log data
+    nethack.model.load.load_nethack_logfiles()
 
     elixir.session.commit()
