@@ -1,5 +1,16 @@
 <%inherit file="/base.mako"/>
 
+<h1>All games</h1>
+
+${h.form('', method='get')}
+<dl>
+    <dt>Player</dt>
+    <dd>${h.text('player')}</dd>
+
+    <dd><input type="submit" value="Search"></dd>
+</dl>
+${h.end_form()}
+
 <table class="games">
 <thead>
 <tr>
