@@ -41,22 +41,44 @@ class DatabaseRowValidator(formencode.validators.FancyValidator):
 class GameSearchForm(formencode.Schema):
     if_key_missing = None
 
-    player = DatabaseRowValidator(model.Player, 'name', not_empty=False)
+    # Allow extraneous junk, but remove it
+    allow_extra_fields = True
+    filter_extra_fields = True
 
+    player = DatabaseRowValidator(model.Player, 'name', not_empty=False)
+    role = DatabaseRowValidator(model.Role, 'name', not_empty=False)
+    race = DatabaseRowValidator(model.Race, 'name', not_empty=False)
+    gender = DatabaseRowValidator(model.Gender, 'name', not_empty=False)
+    alignment = DatabaseRowValidator(model.Alignment, 'name', not_empty=False)
+
+
+def options_from_table(table):
+    """Given a table, returns a list of tuples for populating a <select>
+    element.  Values are taken from the `name` column.
+    """
+    return [('', 'any')] + \
+           [(row.name, row.name) for row in table.query.all()]
 
 class GamesController(BaseController):
 
     def list(self):
         # Parse the form.  We don't really care if it doesn't validate; we'll
         # just ignore that field and show an error
-        c.form = GameSearchForm()
-        form_data = c.form.to_python(request.params)
+        c.form = GameSearchForm(validate_partial_form=True)
+        c.form_data = c.form.to_python(request.params)
+
+        # Constant stuff the form needs to know
+        c.role_options = options_from_table(model.Role)
+        c.race_options = options_from_table(model.Race)
+        c.gender_options = options_from_table(model.Gender)
+        c.alignment_options = options_from_table(model.Alignment)
 
         query = model.Game.query
 
         # Perform filtering
-        if form_data['player']:
-            query = query.filter_by(player=form_data['player'])
+        for column in ['player', 'role', 'race', 'gender', 'alignment']:
+            if c.form_data[column]:
+                query = query.filter_by(**{ column: c.form_data[column] })
 
         # Sort by most recent by default
         query = query.order_by(model.Game.end_time.desc())
@@ -66,5 +88,5 @@ class GamesController(BaseController):
 
         return formencode.htmlfill.render(
             render('/games/list.mako'),
-            c.form.from_python(form_data)
+            c.form.from_python(c.form_data)
         )

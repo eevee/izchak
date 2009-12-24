@@ -7,8 +7,20 @@ ${h.form('', method='get')}
     <dt>Player</dt>
     <dd>${h.text('player')}</dd>
 
+    <dt>Role</dt>
+    <dd>${h.select('role', '', options=c.role_options)}</dd>
+    <dt>Race</dt>
+    <dd>${h.select('race', '', options=c.race_options)}</dd>
+    <dt>Gender</dt>
+    <dd>${h.select('gender', '', options=c.gender_options)}</dd>
+    <dt>Alignment</dt>
+    <dd>${h.select('alignment', '', options=c.alignment_options)}</dd>
+
     <dd><input type="submit" value="Search"></dd>
 </dl>
+% if any(value for value in c.form_data.values() if value is not None):
+<p><a href="${url(controller='games', action='list')}">Reset filtering</a></p>
+% endif
 ${h.end_form()}
 
 <table class="games">
@@ -21,7 +33,7 @@ ${h.end_form()}
     <th>Deaths</th>
     <th>Role</th>
     <th>Race</th>
-    <th>Sex</th>
+    <th>Gender</th>
     <th>Align</th>
     <th colspan="2">HP</th>
     <th>Died in</th>
