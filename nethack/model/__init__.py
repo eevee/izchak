@@ -39,32 +39,53 @@ class EndType(Entity):
     """Identifies how a game ended: by quit, escape, death, or ascension."""
     identifier = Field(Unicode(16))
 
+    games = OneToMany('Game')
+
+    @property
+    def name(self):
+        """Alias for identifier, for consistency with most other tables."""
+        return self.identifier
+
 class Gender(EntityPlusAbbreviation):
     name = Field(Unicode(8))
     abbreviation = Field(Unicode(3))
+
+    games = OneToMany('Game', inverse='gender')
+    final_games = OneToMany('Game', inverse='final_gender')
 
 class Race(EntityPlusAbbreviation):
     name = Field(Unicode(8))
     abbreviation = Field(Unicode(3))
 
+    games = OneToMany('Game')
+
 class Role(EntityPlusAbbreviation):
     name = Field(Unicode(16))
     abbreviation = Field(Unicode(3))
 
+    games = OneToMany('Game')
+
 class Alignment(EntityPlusAbbreviation):
     name = Field(Unicode(8))
     abbreviation = Field(Unicode(3))
+
+    games = OneToMany('Game', inverse='alignment')
+    final_games = OneToMany('Game', inverse='final_alignment')
 
 class Conduct(Entity):
     flag_value = Field(Integer)
     identifier = Field(Unicode(16))
     description = Field(Unicode(64))
 
+    games = ManyToMany('Game')
+
 class Milestone(Entity):
     flag_value = Field(Integer)
     order = Field(Integer)
     identifier = Field(Unicode(16))
     description = Field(Unicode(64))
+
+    games = ManyToMany('Game')
 
 
 ### Tables otherwise defined outside NetHack
