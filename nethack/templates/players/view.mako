@@ -21,9 +21,13 @@
 <tr>
     <td>${category.name}</td>
     <td>
-        <div class="bargraph-bar" style="width: ${count / max_count * 100}%; background-color: #ffc080;">
+        % if count:
+        <div class="bargraph-bar" style="margin-right: ${100 - count / max_count * 100}%;">
             ${count}
         </div>
+        % else:
+        -
+        % endif
     </td>
 </tr>
 % endfor

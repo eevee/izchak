@@ -3,7 +3,7 @@
 <h1>All games</h1>
 
 ${h.form('', method='get')}
-<dl>
+<dl class="standard-form">
     <dt>Player</dt>
     <dd>${h.text('player')}</dd>
 
@@ -26,6 +26,7 @@ ${h.end_form()}
 <table class="games">
 <thead>
 <tr>
+    <th><!-- trophy --></th>
     <th>Player</th>
     <th>Points</th>
     <th>Turns</th>
@@ -43,7 +44,16 @@ ${h.end_form()}
 % for game in c.games:
 <tbody>
 <tr>
-    <td>${game.player.name}</td>
+    <td class="icon" rowspan="2">
+        % if game.end_type.identifier == 'ascension':
+        <img src="/icons/trophy.png" alt="">
+        % elif game.end_type.identifier == 'escape':
+        <img src="/icons/door-open-out.png" alt="">
+        % elif game.end_type.identifier == 'quit':
+        <img src="/icons/cross-small.png" alt="">
+        % endif
+    </td>
+    <td><a href="${url(controller='players', action='view', name=game.player.name)}">${game.player.name}</a></td>
     <td class="number">${game.points}</td>
     <td class="number">${game.turns}</td>
     <td class="number">${game.real_time}</td>
