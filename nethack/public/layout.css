@@ -1,6 +1,11 @@
 /* Global layout */
 html { background: #d6bd84; }
 body { padding: 1em; margin: 1em; background: white; font-family: sans; font-size: 12px; }
+#header { position: relative; margin: -1em; margin-bottom: 1em; padding: 0.5em; border-bottom: 1px solid #d6bd84; background: #eaddbf; }
+#header #title { position: absolute; right: 0.5em; top: 0.5em; }
+#header ul#menu { }
+#header ul#menu li { display: inline; }
+#header ul#menu li + li:before { content: ' • '; }
 
 h1 { font-size: 2em; margin: 0.5em 0 0.25em; padding: 0.17em 0.33em; border-bottom: 3px double black; font-weight: bold; text-shadow: #c0c0c0 1px 1px 3px; }
 h2 { font-size: 1.67em; margin: 0.4em 0 0.2em; padding: 0.17em 0.33em; border-bottom: 2px solid black; }
