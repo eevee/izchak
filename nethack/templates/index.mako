@@ -1,5 +1,7 @@
 <%inherit file="/base.mako"/>
 
+<%def name="title()">Overview</%def>
+
 <p id="big-honkin-telnet-command">telnet nethack.veekun.com</a>
 
 <h1>NetHack</h1>

@@ -1,5 +1,7 @@
 <%inherit file="/base.mako"/>
 
+<%def name="title()">Games</%def>
+
 <h1>All games</h1>
 
 ${h.form('', method='get')}

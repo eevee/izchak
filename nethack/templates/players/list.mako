@@ -1,5 +1,7 @@
 <%inherit file="/base.mako"/>
 
+<%def name="title()">Players</%def>
+
 <table>
 <tr>
     <th>Name</th>

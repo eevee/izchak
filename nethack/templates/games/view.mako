@@ -1,5 +1,7 @@
 <%inherit file="/base.mako"/>
 
+<%def name="title()">Games</%def>
+
 <h1><a href="${url(controller='players', action='view', name=c.game.player.name)}">${c.game.player.name}</a>'s game ending ${c.game.end_time.strftime(c.datetime_format)}</h1>
 
 <p id="epitaph">${c.game.epitaph}</p>
