@@ -1,5 +1,6 @@
 /* Global layout */
-body { padding: 1em; border: 1em solid #d6bd84; font-family: sans; font-size: 12px; }
+html { background: #d6bd84; }
+body { padding: 1em; margin: 1em; background: white; font-family: sans; font-size: 12px; }
 
 h1 { font-size: 2em; margin: 0.5em 0 0.25em; padding: 0.17em 0.33em; border-bottom: 3px double black; font-weight: bold; text-shadow: #c0c0c0 1px 1px 3px; }
 h2 { font-size: 1.67em; margin: 0.4em 0 0.2em; padding: 0.17em 0.33em; border-bottom: 2px solid black; }
@@ -33,7 +34,8 @@ table.games td.number { text-align: right; }
 table.games td.dlvl { text-align: right; }
 table.games td.hp1 { padding-right: 0; text-align: right; }
 table.games td.hp2 { padding-left: 0; }
-table.games td.epitaph { font-style: italic; color: #808080; }
+table.games td.time { text-align: right; }
+table.games td.epitaph { font-style: italic; color: #606060; }
 
 table.games .ASCEND { -moz-box-shadow: 0 0 2em 1em gold; text-shadow: 0 0 1em gold; }
 
@@ -42,3 +44,6 @@ table.bargraph { width: 100%; border-collapse: collapse; }
 table.bargraph col.col-category { width: 8em; }
 table.bargraph td { padding: 0.33em; }
 .bargraph-bar { padding: 0.33em; border: 1px dotted #a58337; background: #d6bd84; }
+
+/* Game page */
+iframe#dumplog { width: 100%; height: 30em; }

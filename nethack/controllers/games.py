@@ -90,3 +90,15 @@ class GamesController(BaseController):
             render('/games/list.mako'),
             c.form.from_python(c.form_data)
         )
+
+    def view(self, name, id):
+        """Show details for a particular game."""
+        try:
+            c.game = model.Game.get(id)
+        except:
+            abort(404)
+
+        if c.game.player.name != name:
+            abort(404)
+
+        return render('/games/view.mako')

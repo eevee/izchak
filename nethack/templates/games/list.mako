@@ -82,10 +82,16 @@ ${h.end_form()}
         <br>out of ${game.deepest_dlvl}
         % endif
     </td>
-    <td rowspan="2">
-        ${game.start_time}
+    <td rowspan="2" class="time">
+    <a href="${url(controller='games', action='view', name=game.player.name, id=game.id)}">
+        ${game.start_time.strftime(h.datetime_format)}
         <br>
-        ${game.end_time}
+        % if game.start_time.date() == game.end_time.date():
+        to ${game.end_time.time().strftime(h.time_format)}
+        % else:
+        to ${game.end_time.strftime(h.datetime_format)}
+        % endif
+        </a>
     </td>
 </tr>
 <tr>
