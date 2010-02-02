@@ -10,9 +10,17 @@ a { font-weight: bold; text-decoration: none; color: #4073bf; }
 a:visited { color: #6a7b95; }
 a:hover { color: #2a4d7f; }
 
+var { font-family: monospace; font-style: italic; }
+code { font-family: monospace; }
+p { line-height: 1.33; margin-top: 0.5em; }
+
 input, button { vertical-align: middle; }
 select { vertical-align: bottom; }
 
+dl { margin-top: 0.5em; line-height: 1.33; }
+dl dt { }
+dl dd { margin-left: 1em; }
+dl dd + dt { margin-top: 0.5em; }
 
 dl.standard-form { line-height: 2; }
 dl.standard-form dt { float: left; width: 10em; text-align: right; font-style: italic; }
@@ -20,6 +28,9 @@ dl.standard-form dd { margin-left: 10.5em; }
 dl.standard-form dd:after { content: 'float clear'; display: block; clear: left; height: 0; visibility: hidden; }
 dl.standard-form dd + dd { margin-top: 1em; }
 
+
+/* Index page */
+#big-honkin-telnet-command { font-size: 2.5em; width: 50%; margin: 0 auto; padding: 0.5em; background: black; color: lime; text-shadow: lime 0 0 10px; font-family: monospace; text-align: center; }
 
 /* The all-important game list */
 table.games { width: 100%; }

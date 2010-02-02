@@ -10,10 +10,8 @@ log = logging.getLogger(__name__)
 class MainController(BaseController):
 
     def index(self):
-        # Return a rendered template
-        #return render('/main.mako')
-        # or, return a response
-        return 'Hello World'
+        """Main page, with a server overview and some links and whatever."""
+        return render('/index.mako')
 
     def trophy(self):
         """The nethack.veekun.com trophy gallery."""

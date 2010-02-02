@@ -18,6 +18,7 @@ def make_map():
     map.connect('/error/{action}', controller='error')
     map.connect('/error/{action}/{id}', controller='error')
 
+    map.connect('/', controller='main', action='index')
     map.connect('/trophy', controller='main', action='trophy')
 
     map.connect('/players', controller='players', action='list')
