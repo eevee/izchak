@@ -1,17 +1,17 @@
-"""Setup the nethack application"""
+"""Setup the izchak application"""
 import logging
 import os
 
 import elixir
 
-from nethack import model
-from nethack.config.environment import load_environment
-import nethack.model.load
+from izchak import model
+from izchak.config.environment import load_environment
+import izchak.model.load
 
 log = logging.getLogger(__name__)
 
 def setup_app(command, conf, vars):
-    """Place any commands to setup nethack here"""
+    """Place any commands to setup izchak here"""
     load_environment(conf.global_conf, conf.local_conf)
 
     # Create the tables if they don't already exist
@@ -142,6 +142,6 @@ def setup_app(command, conf, vars):
         model.Player(name=name)
 
     ### Load all the current game log data
-    nethack.model.load.load_nethack_logfiles()
+    izchak.model.load.load_izchak_logfiles()
 
     elixir.session.commit()

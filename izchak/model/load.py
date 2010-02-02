@@ -3,8 +3,8 @@
 Doesn't actually use any part of Pylons.  The database URL is hard-coded.
 """
 
-pylons_dir = '/home/eevee/nethack.veekun.com'
-nethack_playground = '/opt/nethack.veekun.com/nethack/var'
+pylons_dir = '/home/eevee/nethack.veekun.com/izchak'
+izchak_playground = '/opt/nethack.veekun.com/izchak/var'
 
 from datetime import datetime, timedelta
 import os.path
@@ -13,8 +13,8 @@ import re
 import elixir
 from sqlalchemy import create_engine, func
 
-import nethack.model as model
-from nethack.model import *
+import izchak.model as model
+from izchak.model import *
 
 # Maps the epitaph text to my identifier
 non_death_epitaphs = {
@@ -25,11 +25,11 @@ non_death_epitaphs = {
     u'panic':        u'panic',
 }
 
-def load_nethack_logfiles():
+def load_izchak_logfiles():
     engine = create_engine("sqlite:///{0}/development.db".format(pylons_dir))
     init_model(engine)
 
-    for line in open(os.path.join(nethack_playground, 'xlogfile')):
+    for line in open(os.path.join(izchak_playground, 'xlogfile')):
         # Parse line: a=b:c=d:e=f
         logdata = {}
         for chunk in line.strip().split(':'):

@@ -6,7 +6,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 elixir.session = scoped_session(sessionmaker(autoflush=True,
                                              autocommit=False))
 
-# shortnames turns class Foo into 'foo' rather than 'nethack_model_foo'
+# shortnames turns class Foo into 'foo' rather than 'izchak_model_foo'
 elixir.options_defaults.update({'shortnames': True})
 
 def init_model(engine):

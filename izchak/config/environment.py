@@ -6,10 +6,10 @@ from pylons import config
 from pylons.error import handle_mako_error
 from sqlalchemy import engine_from_config
 
-import nethack.lib.app_globals as app_globals
-import nethack.lib.helpers
-from nethack.config.routing import make_map
-from nethack.model import init_model
+import izchak.lib.app_globals as app_globals
+import izchak.lib.helpers
+from izchak.config.routing import make_map
+from izchak.model import init_model
 
 def load_environment(global_conf, app_conf):
     """Configure the Pylons environment via the ``pylons.config``
@@ -23,11 +23,11 @@ def load_environment(global_conf, app_conf):
                  templates=[os.path.join(root, 'templates')])
 
     # Initialize config with the basic options
-    config.init_app(global_conf, app_conf, package='nethack', paths=paths)
+    config.init_app(global_conf, app_conf, package='izchak', paths=paths)
 
     config['routes.map'] = make_map()
     config['pylons.app_globals'] = app_globals.Globals()
-    config['pylons.h'] = nethack.lib.helpers
+    config['pylons.h'] = izchak.lib.helpers
 
     # Create the Mako TemplateLookup, with the default auto-escaping
     config['pylons.app_globals'].mako_lookup = TemplateLookup(

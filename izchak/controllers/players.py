@@ -5,8 +5,8 @@ from sqlalchemy import and_, func
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 
-from nethack import model
-from nethack.lib.base import BaseController, render
+from izchak import model
+from izchak.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
 

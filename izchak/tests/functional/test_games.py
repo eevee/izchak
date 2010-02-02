@@ -1,4 +1,4 @@
-from nethack.tests import *
+from izchak.tests import *
 
 class TestGamesController(TestController):
 
