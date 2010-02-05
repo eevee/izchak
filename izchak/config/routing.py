@@ -26,6 +26,6 @@ def make_map():
     map.connect('/players/{name}/games', controller='players', action='games')
 
     map.connect('/games', controller='games', action='list')
-    map.connect('/players/{name}/games/{id}', controller='games', action='view')
+    map.connect('/players/{name}/games/{end_time}', controller='games', action='view')
 
     return map

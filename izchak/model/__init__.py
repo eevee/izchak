@@ -97,7 +97,7 @@ class Player(Entity):
 ### Tables populated by NetHack logs
 class Game(Entity):
     start_time      = Field(DateTime)
-    end_time        = Field(DateTime)
+    end_time        = Field(DateTime, index=True)
     real_time       = Field(Interval)
 
     points          = Field(Integer)

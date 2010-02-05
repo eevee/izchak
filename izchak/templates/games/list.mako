@@ -85,7 +85,7 @@ ${h.end_form()}
         % endif
     </td>
     <td rowspan="2" class="time">
-    <a href="${url(controller='games', action='view', name=game.player.name, id=game.id)}">
+    <a href="${url(controller='games', action='view', name=game.player.name, end_time=game.end_time.strftime('%s'))}">
         ${game.start_time.strftime(h.datetime_format)}
         <br>
         % if game.start_time.date() == game.end_time.date():

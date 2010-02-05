@@ -1,3 +1,4 @@
+from datetime import datetime
 import logging
 
 from pylons import request, response, session, tmpl_context as c
@@ -91,14 +92,18 @@ class GamesController(BaseController):
             c.form.from_python(c.form_data)
         )
 
-    def view(self, name, id):
-        """Show details for a particular game."""
-        try:
-            c.game = model.Game.get(id)
-        except:
-            abort(404)
+    def view(self, name, end_time):
+        """Show details for a particular game, selected by end timestamp."""
 
-        if c.game.player.name != name:
+        end_datetime = datetime.fromtimestamp( int(end_time) )
+
+        try:
+            c.game = model.Game.query \
+                .join(model.Player) \
+                .filter(model.Player.name == name) \
+                .filter(model.Game.end_time == end_datetime) \
+                .one()
+        except:
             abort(404)
 
         return render('/games/view.mako')
