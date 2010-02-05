@@ -6,7 +6,6 @@ import elixir
 
 from izchak import model
 from izchak.config.environment import load_environment
-import izchak.model.load
 
 log = logging.getLogger(__name__)
 
@@ -137,11 +136,6 @@ def setup_app(command, conf, vars):
     model.Milestone(flag_value=1 << 11, order=4, identifier='medusa',
                     description='Slew Medusa')
 
-    ### Less hard-coded things not taken directly from the game
-    for name in os.listdir('/opt/nethack.veekun.com/dgldir/userdata'):
-        model.Player(name=name)
-
-    ### Load all the current game log data
-    izchak.model.load.load_izchak_logfiles()
+    # Existing data is loaded by bin/update-db.py
 
     elixir.session.commit()
