@@ -35,7 +35,7 @@
         # TODO config
         dumplog = open('/opt/nethack.veekun.com/dgldir/' + dumplog_path)
         for line in dumplog:
-            context.write(line)
+            context.write( h.escape(line) )
         dumplog.close()
     except IOError:
         context.write("Uh oh!  Can't find the log.")
