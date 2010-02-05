@@ -8,10 +8,12 @@
 
 <dl>
     <dt>Started on</dt>
-    <dd>${c.game.start_time.strftime(c.datetime_format)}</dd>
+    <dd>${c.game.start_time.strftime(h.datetime_format)}</dd>
+    <dt>Ended</dt>
+    <dd>${c.game.end_time.strftime(h.datetime_format)}</dd>
     <dt>Lasted</dt>
     <dd>${c.game.end_time - c.game.start_time}</dd>
 </dl>
 
 <h2>Dump log</h2>
-<iframe id="dumplog" src="http://nethack.veekun.com/userdata/Eevee/dumplog/${c.game.start_time.strftime("%s")}-${c.game.end_time.strftime("%s")}.nh343.txt"></iframe>
+<iframe id="dumplog" src="http://nethack.veekun.com/userdata/${c.game.player.name}/dumplog/${c.game.start_time.strftime("%s")}-${c.game.end_time.strftime("%s")}.nh343.txt"></iframe>
