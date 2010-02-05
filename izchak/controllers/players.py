@@ -32,7 +32,7 @@ class PlayersController(BaseController):
         # Count how this player's games are distributed across various
         # categories
         session = elixir.session
-        count = func.count(model.Game.id)
+        count = func.count(model.Game.id).label('count')
         c.breakdowns = []  # label, [(table, count), ...]
         for table, label in [
             (model.EndType,   'Ending'),
@@ -47,10 +47,20 @@ class PlayersController(BaseController):
             # http://www.mail-archive.com/sqlalchemy@googlegroups.com/msg16304.html
             join = and_(getattr(table, 'games').property.primaryjoin,
                         model.Game.player == c.player)
-            q = session.query(table, count) \
-                       .outerjoin((model.Game, join)) \
-                       .group_by(table.id) \
-                       .order_by(count.desc())
+
+            # To be correct, the query must get the ids and their counts, then
+            # join THAT again to get the full table rows.
+            # Excellent subquery example from:
+            # http://www.sqlalchemy.org/docs/ormtutorial.html#using-subqueries
+            subq = session.query(table.id.label('table_id'), count) \
+                .outerjoin((model.Game, join)) \
+                .group_by(table.id) \
+                .subquery()
+
+            q = session.query(table, subq.c.count) \
+                .outerjoin((subq, table.id == subq.c.table_id)) \
+                .order_by(subq.c.count.desc())
+
             c.breakdowns.append((label, q))
 
         return render('/players/view.mako')
