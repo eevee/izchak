@@ -51,8 +51,8 @@ table.games tbody:hover { background: #d8d8d8; }
 table.games td.icon { width: 16px; vertical-align: middle; }
 table.games td.number { text-align: right; }
 table.games td.dlvl { text-align: right; }
-table.games td.hp1 { padding-right: 0; text-align: right; }
-table.games td.hp2 { padding-left: 0; }
+table.games .hp1 { padding-right: 0; text-align: right; }
+table.games .hp2 { padding-left: 0; text-align: left; }
 table.games td.time { text-align: right; }
 table.games td.epitaph { font-style: italic; color: #606060; }
 

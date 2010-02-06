@@ -106,6 +106,8 @@ class GameSearchForm(wtforms.Form):
             ('end_time', 'time'),
             ('points', 'score'),
             ('turns', 'number of turns'),
+            ('final_hp', 'final HP'),
+            ('max_hp', 'max HP'),
         ],
     )
     sortdir = wtforms.fields.SelectField(
@@ -117,7 +119,7 @@ class GamesController(BaseController):
 
     # Default sort ordering.  Numeric fields are descending -- e.g., most
     # points first.  Everything else is ascending, A-Z.
-    descending_sort_fields = ['end_time', 'points', 'turns']
+    descending_sort_fields = ['end_time', 'points', 'turns', 'final_hp', 'max_hp']
 
     def list(self):
         # Parse the form.  We don't really care if it doesn't validate; we'll

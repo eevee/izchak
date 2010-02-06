@@ -8,7 +8,8 @@
     <a href="${url.current(recency='30', sort='points', sortdir='desc')}">Top games, past month</a> &bull;
     <a href="${url.current(recency='365', sort='points', sortdir='desc')}">Top games, past year</a> &bull;
     <a href="${url.current(recency='all', sort='points', sortdir='desc')}">Top games, all time</a> &bull;
-    <a href="${url.current(end_type='ascension', sort='points', sortdir='asc')}">Lowest ascensions</a>
+    <a href="${url.current(end_type='ascension', sort='points', sortdir='asc')}">Lowest ascensions</a> &bull;
+    <a href="${url.current(end_type='death', sort='final_hp', sortdir='asc')}">Most egregious deaths</a>
 </p>
 
 ${h.form('', method='get')}
@@ -68,7 +69,8 @@ ${h.end_form()}
     <th>Race</th>
     <th>Gender</th>
     <th>Align</th>
-    <th colspan="2">HP</th>
+    <th class="hp1">${sort_header(u'final_hp', u'HP')}</td>
+    <th class="hp2">${sort_header(u'max_hp', u'/Max HP')}</td>
     <th>Died in</th>
     <th>${sort_header(u'end_time', u'Time')}</th>
 </tr>
