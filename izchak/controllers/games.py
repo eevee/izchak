@@ -87,6 +87,19 @@ class GameSearchForm(wtforms.Form):
     race = DatabaseRowSelectField(model.Race, 'name')
     gender = DatabaseRowSelectField(model.Gender, 'name')
     alignment = DatabaseRowSelectField(model.Alignment, 'name')
+    end_type = DatabaseRowSelectField(model.EndType, 'identifier')
+
+    recency = wtforms.fields.SelectField(
+        choices=[
+            ('anytime', 'any time'),
+            ('1', 'past day'),
+            ('7', 'past week'),
+            ('30', 'past 30 days'),
+            ('60', 'past 60 days'),
+            ('90', 'past 90 days'),
+            ('365', 'past year'),
+        ],
+    )
 
     sort = wtforms.fields.SelectField(
         choices=[
@@ -118,18 +131,26 @@ class GamesController(BaseController):
             race=None,
             gender=None,
             alignment=None,
+            end_type=None,
 
+            recency=u'anytime',
             sort=u'end_time',
-            sortdir=u'asc',
+            sortdir=u'desc',
         )
         c.form.validate()
 
         # Perform filtering
         query = model.Game.query
 
-        for column in ['player', 'role', 'race', 'gender', 'alignment']:
+        for column in ['player', 'role', 'race', 'gender', 'alignment',
+                       'end_type']:
             if c.form[column].data:
                 query = query.filter_by(**{ column: c.form[column].data })
+
+        if c.form.recency.data != 'anytime':
+            now = datetime.now()
+            earliest_date = now - timedelta(days=int(c.form.recency.data))
+            query = query.filter(model.Game.end_time >= earliest_date)
 
         # Sorting
         sort_col = c.form.sort.data

@@ -58,6 +58,13 @@ table.games td.epitaph { font-style: italic; color: #606060; }
 
 table.games .ASCEND { -moz-box-shadow: 0 0 2em 1em gold; text-shadow: 0 0 1em gold; }
 
+select[name='end_type'] option { padding: 2px 2px 2px 20px; vertical-align: middle; }
+select[name='end_type'] option[value='ascension'] { background: url(/icons/trophy.png) 2px center no-repeat; }
+select[name='end_type'] option[value='escape'] { background: url(/icons/door-open-out.png) 2px center no-repeat; }
+select[name='end_type'] option[value='quit'] { background: url(/icons/cross-small.png) 2px center no-repeat; }
+select[name='end_type'] option[value='trickery'] { background: url(/icons/wand.png) 2px center no-repeat; }
+select[name='end_type'] option[value='panic'] { background: url(/icons/bomb.png) 2px center no-repeat; }
+
 /* Player page */
 table.bargraph { width: 100%; border-collapse: collapse; }
 table.bargraph col.col-category { width: 8em; }

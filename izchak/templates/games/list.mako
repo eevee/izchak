@@ -3,6 +3,13 @@
 <%def name="title()">Games</%def>
 
 <h1>All games</h1>
+<p>
+    <img src="/icons/reports.png" alt=""> Interesting lists:
+    <a href="${url.current(recency='30', sort='points', sortdir='desc')}">Top games, past month</a> &bull;
+    <a href="${url.current(recency='365', sort='points', sortdir='desc')}">Top games, past year</a> &bull;
+    <a href="${url.current(recency='all', sort='points', sortdir='desc')}">Top games, all time</a> &bull;
+    <a href="${url.current(end_type='ascension', sort='points', sortdir='asc')}">Lowest ascensions</a>
+</p>
 
 ${h.form('', method='get')}
 <dl class="standard-form">
@@ -17,6 +24,11 @@ ${h.form('', method='get')}
     <dd>${c.form.gender() | n}</dd>
     <dt>Alignment</dt>
     <dd>${c.form.alignment() | n}</dd>
+    <dt>Ending type</dt>
+    <dd>${c.form.end_type() | n}</dd>
+
+    <dt>Time</dt>
+    <dd>${c.form.recency() | n}</dd>
 
     <dd><input type="submit" value="Search"></dd>
 </dl>
@@ -71,6 +83,10 @@ ${h.end_form()}
         <img src="/icons/door-open-out.png" alt="">
         % elif game.end_type.identifier == 'quit':
         <img src="/icons/cross-small.png" alt="">
+        % elif game.end_type.identifier == 'trickery':
+        <img src="/icons/wand.png" alt="">
+        % elif game.end_type.identifier == 'panic':
+        <img src="/icons/bomb.png" alt="">
         % endif
     </td>
     <td><a href="${url(controller='players', action='view', name=game.player.name)}">${game.player.name}</a></td>
