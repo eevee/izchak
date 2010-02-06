@@ -7,20 +7,20 @@
 ${h.form('', method='get')}
 <dl class="standard-form">
     <dt>Player</dt>
-    <dd>${h.text('player')}</dd>
+    <dd>${c.form.player() | n}</dd>
 
     <dt>Role</dt>
-    <dd>${h.select('role', '', options=c.role_options)}</dd>
+    <dd>${c.form.role() | n}</dd>
     <dt>Race</dt>
-    <dd>${h.select('race', '', options=c.race_options)}</dd>
+    <dd>${c.form.race() | n}</dd>
     <dt>Gender</dt>
-    <dd>${h.select('gender', '', options=c.gender_options)}</dd>
+    <dd>${c.form.gender() | n}</dd>
     <dt>Alignment</dt>
-    <dd>${h.select('alignment', '', options=c.alignment_options)}</dd>
+    <dd>${c.form.alignment() | n}</dd>
 
     <dd><input type="submit" value="Search"></dd>
 </dl>
-% if any(value for value in c.form_data.values() if value is not None):
+% if any(True for field in c.form if field.data):
 <p><a href="${url(controller='games', action='list')}">Reset filtering</a></p>
 % endif
 ${h.end_form()}
