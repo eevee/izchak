@@ -21,14 +21,15 @@ p { line-height: 1.33; margin-top: 0.5em; }
 p img { vertical-align: bottom; }
 
 input, button { vertical-align: middle; }
+input[type='submit'], input[type='reset'], input[type='button'], button { cursor: pointer; }
 select { vertical-align: bottom; }
 
 dl { margin-top: 0.5em; line-height: 1.33; }
 dl dt { }
-dl dd { margin-left: 1em; }
-dl dd + dt { margin-top: 0.5em; }
+dl dd { margin-left: 1em; margin-top: 0.5em; }
+dl dt { margin-top: 0.5em; }
 
-dl.standard-form { line-height: 2; }
+dl.standard-form { line-height: 1.33; }
 dl.standard-form dt { float: left; width: 10em; text-align: right; font-style: italic; }
 dl.standard-form dd { margin-left: 10.5em; }
 dl.standard-form dd:after { content: 'float clear'; display: block; clear: left; height: 0; visibility: hidden; }
@@ -40,7 +41,8 @@ dl.standard-form dd + dd { margin-top: 1em; }
 
 /* The all-important game list */
 table.games { width: 100%; }
-table.games th { padding: 0.33em; border-bottom: 1px solid #404040; text-align: center; font-weight: bold; }
+table.games th { padding: 0.33em; border-bottom: 1px solid #404040; text-align: center; font-weight: bold; vertical-align: bottom; }
+table.games th a { display: block; }
 table.games td { padding: 0.17em 0.33em; line-height: 1.33; }
 table.games tbody:nth-child(2n  ) { background: #f0f0f0; }
 table.games tbody:nth-child(2n+1) { background: #ffffff; }

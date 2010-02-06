@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 
 from pylons import request, response, session, tmpl_context as c
@@ -88,8 +88,23 @@ class GameSearchForm(wtforms.Form):
     gender = DatabaseRowSelectField(model.Gender, 'name')
     alignment = DatabaseRowSelectField(model.Alignment, 'name')
 
+    sort = wtforms.fields.SelectField(
+        choices=[
+            ('end_time', 'time'),
+            ('points', 'score'),
+            ('turns', 'number of turns'),
+        ],
+    )
+    sortdir = wtforms.fields.SelectField(
+        choices=[ (u'asc', u'asc'), (u'desc', u'desc') ],
+    )
+
 
 class GamesController(BaseController):
+
+    # Default sort ordering.  Numeric fields are descending -- e.g., most
+    # points first.  Everything else is ascending, A-Z.
+    descending_sort_fields = ['end_time', 'points', 'turns']
 
     def list(self):
         # Parse the form.  We don't really care if it doesn't validate; we'll
@@ -103,22 +118,30 @@ class GamesController(BaseController):
             race=None,
             gender=None,
             alignment=None,
+
+            sort=u'end_time',
+            sortdir=u'asc',
         )
         c.form.validate()
 
         # Perform filtering
         query = model.Game.query
 
-        print c.form.data
         for column in ['player', 'role', 'race', 'gender', 'alignment']:
             if c.form[column].data:
                 query = query.filter_by(**{ column: c.form[column].data })
 
-        # Sort by most recent by default
-        query = query.order_by(model.Game.end_time.desc())
+        # Sorting
+        sort_col = c.form.sort.data
+        sort_dir = c.form.sortdir.data
+        sort_order = getattr(model.Game, sort_col)
+        sort_order = getattr(sort_order, sort_dir)()
+        query = query.order_by(sort_order)
 
         # TODO: paging
         c.games = query.all()
+
+        c.descending_sort_fields = self.descending_sort_fields
 
         return render('/games/list.mako')
 

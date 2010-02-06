@@ -20,18 +20,36 @@ ${h.form('', method='get')}
 
     <dd><input type="submit" value="Search"></dd>
 </dl>
-% if any(True for field in c.form if field.data):
+% if any(True for field in c.form if field.data != field._default):
 <p><a href="${url(controller='games', action='list')}">Reset filtering</a></p>
 % endif
 ${h.end_form()}
+
+<%def name="sort_header(column, label)">\
+<%
+    if c.form.sort.data == column:
+        sortdir = 'asc' if c.form.sortdir.data == 'desc' else 'desc'
+    elif column in c.descending_sort_fields:
+        sortdir = 'desc'
+    else:
+        sortdir = 'asc'
+%>
+    <a href="${url.current(sort=column, sortdir=sortdir)}">
+        % if c.form.sort.data == column:
+            ## Assumes that descending-by-default fields are numeric
+            <img src="/icons/sort-${'number' if column in c.descending_sort_fields else 'alphabet'}${'-descending' if c.form.sortdir.data == 'desc' else ''}.png" alt="${c.form.sortdir.data}"><br>
+        % endif
+        ${label}
+    </a>
+</%def>
 
 <table class="games">
 <thead>
 <tr>
     <th><!-- trophy --></th>
     <th>Player</th>
-    <th>Points</th>
-    <th>Turns</th>
+    <th>${sort_header(u'points', u'Score')}</th>
+    <th>${sort_header(u'turns', u'Turns')}</th>
     <th>Duration</th>
     <th>Deaths</th>
     <th>Role</th>
@@ -40,7 +58,7 @@ ${h.end_form()}
     <th>Align</th>
     <th colspan="2">HP</th>
     <th>Died in</th>
-    <th>Time</th>
+    <th>${sort_header(u'end_time', u'Time')}</th>
 </tr>
 </thead>
 % for game in c.games:
