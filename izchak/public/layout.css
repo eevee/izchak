@@ -29,11 +29,21 @@ dl dt { }
 dl dd { margin-left: 1em; margin-top: 0.5em; }
 dl dt { margin-top: 0.5em; }
 
-dl.standard-form { line-height: 1.33; }
+dl.standard-form { line-height: 1.33; overflow: hidden; }
 dl.standard-form dt { float: left; width: 10em; text-align: right; font-style: italic; }
+dl.standard-form dt:after { content: ':'; }
 dl.standard-form dd { margin-left: 10.5em; }
 dl.standard-form dd:after { content: 'float clear'; display: block; clear: left; height: 0; visibility: hidden; }
 dl.standard-form dd + dd { margin-top: 1em; }
+
+div.columns2 { overflow: hidden /* float context */; }
+div.columns2 .columns2-left { width: 50%; float: left; }
+div.columns2 .columns2-right { width: 50%; }
+
+ul.checklist { }
+ul.checklist li { padding-left: 16px; }
+ul.checklist li.yes { background: url(/icons/tick-small.png) left center no-repeat; }
+ul.checklist li.no { font-size: 0.75em; font-style: italic; color: #a0a0a0; }
 
 
 /* Index page */
@@ -58,6 +68,7 @@ table.games td.epitaph { font-style: italic; color: #606060; }
 
 table.games .ASCEND { -moz-box-shadow: 0 0 2em 1em gold; text-shadow: 0 0 1em gold; }
 
+/* nb: from h.end_type_icon */
 select[name='end_type'] option { padding: 2px 2px 2px 20px; vertical-align: middle; }
 select[name='end_type'] option[value='ascension'] { background: url(/icons/trophy.png) 2px center no-repeat; }
 select[name='end_type'] option[value='escape'] { background: url(/icons/door-open-out.png) 2px center no-repeat; }

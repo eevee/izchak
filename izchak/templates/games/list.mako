@@ -79,21 +79,11 @@ ${h.end_form()}
 <tbody>
 <tr>
     <td class="icon" rowspan="2">
-        % if game.end_type.identifier == 'ascension':
-        <img src="/icons/trophy.png" alt="">
-        % elif game.end_type.identifier == 'escape':
-        <img src="/icons/door-open-out.png" alt="">
-        % elif game.end_type.identifier == 'quit':
-        <img src="/icons/cross-small.png" alt="">
-        % elif game.end_type.identifier == 'trickery':
-        <img src="/icons/wand.png" alt="">
-        % elif game.end_type.identifier == 'panic':
-        <img src="/icons/bomb.png" alt="">
-        % endif
+        ${h.end_type_icon(game.end_type)}
     </td>
     <td><a href="${url(controller='players', action='view', name=game.player.name)}">${game.player.name}</a></td>
-    <td class="number">${game.points}</td>
-    <td class="number">${game.turns}</td>
+    <td class="number">${game.points | h.format_commify}</td>
+    <td class="number">${game.turns | h.format_commify}</td>
     <td class="number">${game.real_time}</td>
     <td class="number">${game.deaths}</td>
 
