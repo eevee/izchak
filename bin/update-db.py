@@ -31,11 +31,20 @@ from izchak.model import *
 
 # Maps the epitaph text to my identifier
 non_death_epitaphs = {
-    u'quit':         u'quit',
-    u'escaped':      u'escape',
-    u'ascended':     u'ascension',
-    u'a trickery':   u'trickery',
-    u'panic':        u'panic',
+    u'quit':        u'quit',
+    u'escaped':     u'escape',
+    u'ascended':    u'ascension',
+    u'a trickery':  u'trickery',
+    u'panic':       u'panic',
+
+    # Less obvious epitaphs
+    u'escaped (in celestial disgrace)':
+                    u'escape',
+    u'escaped (with a fake Amulet)':
+                    u'escape',
+    # Levelport to -10 or above
+    u'went to heaven prematurely':
+                    u'escape',
 }
 
 
@@ -105,7 +114,7 @@ def init():
                 # Next line is new, so just break here
                 last_game_match = True
                 break
-        
+
         # If there were no matches at all in the file, then either someone has
         # tampered with the log (unlikely) or everything in it is new (somewhat
         # likely).  It's possible to check for older timestamps than we have
@@ -236,7 +245,7 @@ def parse_logfile_record(record):
     for chunk in record.strip().split(':'):
         k, v = chunk.split('=', 1)
         data[k] = unicode(v)
-    
+
     return data
 
 
