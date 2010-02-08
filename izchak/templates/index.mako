@@ -46,6 +46,8 @@
     <dd>Fixes some crashes related to dropping acid.  Hm.</dd>
     <dt><a href="http://bilious.homelinux.org/?337">astral call exploit fix</a></dt>
     <dd>It's possible to figure out the correct altar on the Astral Plane by using telepathy and trying to <kbd>C</kbd>all a priest; the game will reveal the priest's corresponding god in the resulting error message.  This patch randomizes the named god, fixing this minor exploit.</dd>
+    <dt><a href="http://bilious.homelinux.org/?349">secure random number generator</a></dt>
+    <dd>The default NetHack PRNG is easily broken.  This one should be effectively impossible to exploit.</dd>
 </dl>
 <h2>Gameplay</h2>
 <dl>
@@ -76,8 +78,6 @@
     <dd>When you use a tin opener, your pet cats come running.</dd>
     <dt><a href="http://bilious.homelinux.org/?23">coinflip</a></dt>
     <dd><kbd>a</kbd>pply <kbd>$</kbd> to flip a coin.</dd>
-    <dt><a href="http://bilious.homelinux.org/?288">confused magic whistle</a></dt>
-    <dd>Apply a magic whistle while confused, and you will teleport near one of your pets.</dd>
     <dt><a href="http://bilious.homelinux.org/?193">dragon hoard</a></dt>
     <dd>A player polymorphed into a dragon may <kbd>#sit</kbd> on a pile of gold for a silly message.</dd>
     <dt><a href="http://bilious.homelinux.org/?147">trap cancel</a></dt>
