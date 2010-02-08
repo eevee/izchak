@@ -17,6 +17,8 @@ class DatabaseRowField(wtforms.fields.Field):
     """
 
     def __init__(self, label, table, column, *args, **kwargs):
+        self.ERROR = self.JUNKDATA = None
+
         super(DatabaseRowField, self).__init__(label, *args, **kwargs)
         self.table = table
         self.column = column
@@ -27,8 +29,6 @@ class DatabaseRowField(wtforms.fields.Field):
 
     def process_formdata(self, valuelist):
         """Processes and loads the form value."""
-        self.ERROR = self.JUNKDATA = None
-
         # Default of None
         if not valuelist or valuelist[0] == '':
             self.data = None
