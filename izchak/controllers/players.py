@@ -33,7 +33,7 @@ class PlayersController(BaseController):
         # categories
         session = elixir.session
         count = func.count(model.Game.id).label('count')
-        c.breakdowns = []  # label, [(table, count), ...]
+        c.breakdowns = {}  # label => [(table, count), ...]
         for table, label in [
             (model.EndType,   'Ending'),
             (model.Role,      'Role'),
@@ -61,6 +61,6 @@ class PlayersController(BaseController):
                 .outerjoin((subq, table.id == subq.c.table_id)) \
                 .order_by(subq.c.count.desc())
 
-            c.breakdowns.append((label, q))
+            c.breakdowns[label] = q.all()
 
         return render('/players/view.mako')

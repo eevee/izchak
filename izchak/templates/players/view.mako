@@ -11,27 +11,43 @@
 
 
 <h2>Breakdowns</h2>
-% for label, breakdown in c.breakdowns:
-
+<%! from izchak.model import EndType %>
+<%def name="print_breakdown(label)">
 <h3>${label}</h3>
 <table class="bargraph">
 <col class="col-category">
 <col class="col-count">
-<% max_count = None %>\
-% for category, count in breakdown:
-<% if max_count is None: max_count = count * 1.0 %>\
+<% max_count = c.breakdowns[label][0].count %>\
+% for category, count in c.breakdowns[label]:
 <tr>
-    <td>${category.name}</td>
+    <td class="col-category">
+        ${category.name}
+        % if isinstance(category, EndType):
+        ${h.end_type_icon(category)}
+        % endif
+    </td>
     <td>
         % if count:
-        <div class="bargraph-bar" style="margin-right: ${100 - count / max_count * 100}%;">
+        <div class="bargraph-bar" style="margin-right: ${100 - 100.0 * count / max_count}%;">
             ${count}
         </div>
         % else:
-        -
+        <div class="bargraph-bar-zero">0</div>
         % endif
     </td>
 </tr>
 % endfor
 </table>
-% endfor
+</%def>
+
+<div class="columns2">
+<div class="columns2-left">
+${print_breakdown(u'Ending')}
+${print_breakdown(u'Race')}
+${print_breakdown(u'Gender')}
+</div>
+<div class="columns2-right">
+${print_breakdown(u'Role')}
+${print_breakdown(u'Alignment')}
+</div>
+</div>

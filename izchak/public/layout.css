@@ -19,6 +19,7 @@ var { font-family: monospace; font-style: italic; }
 code { font-family: monospace; }
 p { line-height: 1.33; margin-top: 0.5em; }
 p img { vertical-align: bottom; }
+td img { vertical-align: bottom; }
 
 input, button { vertical-align: middle; }
 input[type='submit'], input[type='reset'], input[type='button'], button { cursor: pointer; }
@@ -37,8 +38,8 @@ dl.standard-form dd:after { content: 'float clear'; display: block; clear: left;
 dl.standard-form dd + dd { margin-top: 1em; }
 
 div.columns2 { overflow: hidden /* float context */; }
-div.columns2 .columns2-left { width: 50%; float: left; }
-div.columns2 .columns2-right { width: 50%; }
+div.columns2 .columns2-left { width: 49.5%; float: left; }
+div.columns2 .columns2-right { width: 49.5%; float: right; }
 
 ul.checklist { }
 ul.checklist li { padding-left: 16px; }
@@ -78,9 +79,10 @@ select[name='end_type'] option[value='panic'] { background: url(/icons/bomb.png)
 
 /* Player page */
 table.bargraph { width: 100%; border-collapse: collapse; }
-table.bargraph col.col-category { width: 8em; }
-table.bargraph td { padding: 0.33em; }
-.bargraph-bar { padding: 0.33em; border: 1px dotted #a58337; background: #d6bd84; }
+table.bargraph .col-category { width: 7.5em; padding-right: 0.5em; text-align: right; }
+table.bargraph td { padding: 0.17em; }
+.bargraph-bar { font-size: 0.75em; padding: 0.33em; border: 1px solid #e2d0a8; background: #d6bd84; }
+.bargraph-bar-zero { width: 0; font-size: 0.75em; padding: 0.33em 0; border: 1px solid #e2d0a8; background: #d6bd84; }
 
 /* Game page */
 #epitaph { margin: 0.5em 4em; padding: 0.5em 1em; background-color: #e0e0e0; -moz-border-radius: 0.25em; font-family: monospace; }
