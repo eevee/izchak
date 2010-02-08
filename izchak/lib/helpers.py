@@ -57,20 +57,26 @@ def divide_timedeltas(td1, td2):
 ### Gameplay-related
 def end_type_icon(end_type):
     """Returns an icon appropriate to the given end type."""
-    if end_type.identifier == 'ascension':
+    if isinstance(end_type, basestring):
+        # Already an identifier
+        identifier = end_type
+    else:
+        identifier = end_type.identifier
+
+    if identifier == 'ascension':
         icon = u'trophy'
-    elif end_type.identifier == 'escape':
+    elif identifier == 'escape':
         icon = u'door-open-out'
-    elif end_type.identifier == 'quit':
+    elif identifier == 'quit':
         icon = u'cross-small'
-    elif end_type.identifier == 'trickery':
+    elif identifier == 'trickery':
         icon = u'wand'
-    elif end_type.identifier == 'panic':
+    elif identifier == 'panic':
         icon = u'bomb'
     else:
         # Regular deaths need no icon
         return u''
 
     return image("/icons/{0}.png".format(icon),
-                 alt=end_type.identifier,
-                 title=end_type.identifier)
+                 alt=identifier,
+                 title=identifier)

@@ -15,14 +15,18 @@ class DeathsController(BaseController):
     def list(self):
         q = elixir.session.query(
             Game.epitaph_simple,
+            EndType.identifier          .label('end_type_identifier'),
             func.count(Game.id)         .label('count'),
             func.sum(Game.points)       .label('total_points'),
             func.avg(Game.points)       .label('average_points'),
             func.max(Game.deepest_dlvl) .label('max_dlvl'),
             func.avg(Game.deepest_dlvl) .label('average_dlvl'),
             ) \
-            .group_by(Game.epitaph_simple) \
-            .order_by(func.count(Game.id).desc())
+            .join(Game.end_type) \
+            .group_by(Game.epitaph_simple,
+                      EndType.identifier) \
+            .order_by(func.count(Game.id).desc(),
+                      Game.epitaph_simple.asc())
 
         c.deaths = q.all()
 

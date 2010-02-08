@@ -19,7 +19,7 @@
 <tbody>
 <tr>
     <td class="icon" rowspan="2">
-        ##${h.end_type_icon(game.end_type)}
+        ${h.end_type_icon(death.end_type_identifier)}
     </td>
     <td class="number">${h.format_commify(death.count)}</td>
     <td class="number">${h.format_commify(death.total_points)}</td>
