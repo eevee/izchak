@@ -4,11 +4,19 @@
 
 <h1>All games</h1>
 <p>
-    <img src="/icons/reports.png" alt=""> Interesting lists:
+    <img src="/icons/points.png" alt="">
     <a href="${url.current(recency='30', sort='points', sortdir='desc')}">Top games, past month</a> &bull;
     <a href="${url.current(recency='365', sort='points', sortdir='desc')}">Top games, past year</a> &bull;
-    <a href="${url.current(recency='all', sort='points', sortdir='desc')}">Top games, all time</a> &bull;
+    <a href="${url.current(recency='all', sort='points', sortdir='desc')}">Top games, all time</a>
+</p>
+<p>
+    <img src="/icons/trophy.png" alt="">
     <a href="${url.current(end_type='ascension', sort='points', sortdir='asc')}">Lowest ascensions</a> &bull;
+    <a href="${url.current(end_type='ascension', sort='real_time', sortdir='desc')}">Fastest ascensions (time)</a> &bull;
+    <a href="${url.current(end_type='ascension', sort='turns', sortdir='desc')}">Fastest ascensions (turns)</a>
+</p>
+<p>
+    <img src="/icons/ghost.png" alt="">
     <a href="${url.current(end_type='death', sort='final_hp', sortdir='asc')}">Most egregious deaths</a>
 </p>
 
