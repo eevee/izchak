@@ -51,7 +51,7 @@ ul.checklist li.no { font-size: 0.75em; font-style: italic; color: #a0a0a0; }
 /* Index page */
 #big-honkin-telnet-command { font-size: 2.5em; width: 50%; margin: 0 auto; padding: 0.5em; background: black; color: lime; text-shadow: lime 0 0 10px; font-family: monospace; text-align: center; }
 
-/* The all-important game list */
+/* The all-important inaccurately-named game list */
 table.games { width: 100%; }
 table.games th { padding: 0.33em; border-bottom: 1px solid #404040; text-align: center; font-weight: bold; vertical-align: bottom; }
 table.games th a { display: block; }
@@ -61,7 +61,7 @@ table.games tbody:nth-child(2n+1) { background: #ffffff; }
 table.games tbody:hover { background: #d8d8d8; }
 
 table.games td.icon { width: 16px; vertical-align: middle; }
-table.games td.number { text-align: right; }
+table.games td.number { width: 6em; text-align: right; }
 table.games td.dlvl { text-align: right; }
 table.games .hp1 { padding-right: 0; text-align: right; }
 table.games .hp2 { padding-left: 0; text-align: left; }

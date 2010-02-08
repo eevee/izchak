@@ -16,10 +16,15 @@ def format_float(n):
     return "{0:0.2f}".format(float(n))
 
 def format_commify(n):
-    """Sticks commas in a number.
-
-    Only works for integers!"""
+    """Sticks commas in a number."""
     s = unicode(n)
+
+    # Take care of decimals
+    float_part = '0'
+    if '.' in s:
+        s, float_part = s.split('.', 1)
+
+    # Break the number into three-digit chunks, then join with a comma
     chunks = []
 
     while len(s) > 3:
@@ -27,7 +32,13 @@ def format_commify(n):
         s = s[0:-3]
     chunks.insert(0, s)
 
-    return ','.join(chunks)
+    result = ','.join(chunks)
+
+    # Reappend any decimal part
+    if float_part and int(float_part) != 0:
+        result = '.'.join([result, float_part])
+
+    return result
 
 ### TIME STUFF
 datetime_format = "%b %e '%y, %H:%M"

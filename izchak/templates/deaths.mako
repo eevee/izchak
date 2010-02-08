@@ -8,7 +8,10 @@
 <tr>
     <th><!-- trophy --></th>
     <th>Count</th>
-    <th>Total points</th>
+    <th>Total score</th>
+    <th>Average score</th>
+    <th>Deepest dlvl</th>
+    <th>Average dlvl</th>
     <th>Epitaph</th>
 </tr>
 </thead>
@@ -20,6 +23,9 @@
     </td>
     <td class="number">${h.format_commify(death.count)}</td>
     <td class="number">${h.format_commify(death.total_points)}</td>
+    <td class="number">${h.format_commify(h.format_float(death.average_points))}</td>
+    <td class="number">${h.format_commify(death.max_dlvl)}</td>
+    <td class="number">${h.format_commify(h.format_float(death.average_dlvl))}</td>
     <td>${death.epitaph_simple}</td>
 </tr>
 </tbody>
