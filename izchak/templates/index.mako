@@ -61,8 +61,6 @@
     <dd>Adds new variations on some fixed-layout special levels.</dd>
     <dt><a href="http://bilious.homelinux.org/?254">flipped levels</a></dt>
     <dd>Fixed special levels can be randomly flipped: horizontally, vertically, or both.</dd>
-    <dt><a href="http://bilious.homelinux.org/?197">island/river</a></dt>
-    <dd>Adds a new special room, the island.  X marks the spot.  Also adds randomly-generated rivers, which may run through a level.  Room generation is also changed slightly to allow for different types of special room on the same floor.</dd>
     <dt><a href="http://bilious.homelinux.org/?264">moonphase</a></dt>
     <dd>Fewer rooms are dark around a full moon, and more are dark around a new moon.</dd>
     <dt><a href="http://bilious.homelinux.org/?218">spore colony</a></dt>
