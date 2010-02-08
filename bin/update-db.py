@@ -80,7 +80,7 @@ def init():
     last_user = Player.query.order_by(Player.id.desc()).first()
     if last_user:
         cursor = dgl_connection.cursor()
-        cursor.execute("SELECT id FROM dglusers WHERE name = ?",
+        cursor.execute("SELECT id FROM dglusers WHERE username = ?",
                        (last_user.name,))
         (last_dgl_user_id,) = cursor.fetchone()
 
