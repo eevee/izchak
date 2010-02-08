@@ -16,8 +16,8 @@ class DatabaseRowField(wtforms.fields.Field):
     Empty strings and None become None and are considered legal.
     """
 
-    def __init__(self, table, column, *args, **kwargs):
-        super(DatabaseRowField, self).__init__(*args, **kwargs)
+    def __init__(self, label, table, column, *args, **kwargs):
+        super(DatabaseRowField, self).__init__(label, *args, **kwargs)
         self.table = table
         self.column = column
 
@@ -27,6 +27,7 @@ class DatabaseRowField(wtforms.fields.Field):
 
     def process_formdata(self, valuelist):
         """Processes and loads the form value."""
+        self.ERROR = self.JUNKDATA = None
 
         # Default of None
         if not valuelist or valuelist[0] == '':
@@ -38,7 +39,14 @@ class DatabaseRowField(wtforms.fields.Field):
             self.data = row
             return
 
-        raise ValueError("No such {0}.".format( self.table.table.name.lower() ))
+        # XXX this is until a release of wtforms that recognizes processing
+        # errors
+        self.ERROR = ValueError("No such {0}.".format( self.table.table.name.lower() ))
+        self.JUNKDATA = valuelist[0]
+
+    def pre_validate(self, form):
+        if self.ERROR:
+            raise self.ERROR
 
 
 class DatabaseRowSelectField(DatabaseRowField, wtforms.fields.SelectField):
@@ -75,6 +83,10 @@ class DatabaseRowTextField(DatabaseRowField, wtforms.fields.TextField):
     """Requires the user to enter something in a text field."""
     def _value(self):
         """Converts Python value back to a form value."""
+        if self.JUNKDATA:
+            # Only needed for the above hack
+            return self.JUNKDATA
+
         if self.data is None:
             return u''
         else:
@@ -82,14 +94,15 @@ class DatabaseRowTextField(DatabaseRowField, wtforms.fields.TextField):
 
 
 class GameSearchForm(wtforms.Form):
-    player = DatabaseRowTextField(model.Player, 'name')
-    role = DatabaseRowSelectField(model.Role, 'name')
-    race = DatabaseRowSelectField(model.Race, 'name')
-    gender = DatabaseRowSelectField(model.Gender, 'name')
-    alignment = DatabaseRowSelectField(model.Alignment, 'name')
-    end_type = DatabaseRowSelectField(model.EndType, 'identifier')
+    player = DatabaseRowTextField(u'Player', model.Player, 'name')
+    role = DatabaseRowSelectField(u'Role', model.Role, 'name')
+    race = DatabaseRowSelectField(u'Race', model.Race, 'name')
+    gender = DatabaseRowSelectField(u'Gender', model.Gender, 'name')
+    alignment = DatabaseRowSelectField(u'Alignment', model.Alignment, 'name')
+    end_type = DatabaseRowSelectField(u'Ending', model.EndType, 'identifier')
 
     recency = wtforms.fields.SelectField(
+        u'Time',
         choices=[
             ('anytime', 'any time'),
             ('1', 'past day'),
@@ -141,7 +154,13 @@ class GamesController(BaseController):
             sort=u'end_time',
             sortdir=u'desc',
         )
-        c.form.validate()
+
+        if not c.form.validate():
+            c.valid_form = False
+            return render('/games/list.mako')
+
+        c.valid_form = True
+
 
         # Perform filtering
         query = model.Game.query

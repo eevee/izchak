@@ -24,6 +24,7 @@ td img { vertical-align: bottom; }
 input, button { vertical-align: middle; }
 input[type='submit'], input[type='reset'], input[type='button'], button { cursor: pointer; }
 select { vertical-align: bottom; }
+.form-error { padding-left: 16px; background: url(/icons/exclamation-small-red.png) left center no-repeat; color: #800000; }
 
 dl { margin-top: 0.5em; line-height: 1.33; }
 dl dt { }

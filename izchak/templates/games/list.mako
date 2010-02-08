@@ -21,31 +21,37 @@
 </p>
 
 ${h.form('', method='get')}
-<dl class="standard-form">
-    <dt>Player</dt>
-    <dd>${c.form.player() | n}</dd>
+<div class="columns2">
+    <div class="columns2-left">
+        <dl class="standard-form">
+            ${self.print_field(c.form.player)}
+            ${self.print_field(c.form.role)}
+            ${self.print_field(c.form.race)}
+            ${self.print_field(c.form.gender)}
+            ${self.print_field(c.form.alignment)}
+        </dl>
+    </div>
+    <div class="columns2-right">
+        <dl class="standard-form">
+            ${self.print_field(c.form.end_type)}
+            ${self.print_field(c.form.recency)}
+        </dl>
+    </div>
+</div>
+<p><input type="submit" value="Search"></p>
 
-    <dt>Role</dt>
-    <dd>${c.form.role() | n}</dd>
-    <dt>Race</dt>
-    <dd>${c.form.race() | n}</dd>
-    <dt>Gender</dt>
-    <dd>${c.form.gender() | n}</dd>
-    <dt>Alignment</dt>
-    <dd>${c.form.alignment() | n}</dd>
-    <dt>Ending type</dt>
-    <dd>${c.form.end_type() | n}</dd>
-
-    <dt>Time</dt>
-    <dd>${c.form.recency() | n}</dd>
-
-    <dd><input type="submit" value="Search"></dd>
-</dl>
 % if any(True for field in c.form if field.data != field._default):
 <p><a href="${url(controller='games', action='list')}">Reset filtering</a></p>
 % endif
 ${h.end_form()}
 
+
+## Stop right here if the form is bogus
+% if not c.valid_form:
+<% return %>\
+% endif
+
+## RESULTS
 <%def name="sort_header(column, label)">\
 <%
     if c.form.sort.data == column:

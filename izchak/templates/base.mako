@@ -21,3 +21,13 @@
 </html>
 
 <%def name="title()">Untitled</%def>
+
+<%def name="print_field(field)">
+    <dt>${unicode(field.label) | n}</dt>
+    <dd>
+        ${field() | n}
+        % for error in field.errors:
+        <div class="form-error">${error}</div>
+        % endfor
+    </dd>
+</%def>
