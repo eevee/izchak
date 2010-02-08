@@ -12,6 +12,7 @@
             <li><a href="${url(controller='main', action='index')}">overview</a></li>
             <li><a href="${url(controller='games', action='list')}">games</a></li>
             <li><a href="${url(controller='players', action='list')}">players</a></li>
+            <li><a href="${url(controller='deaths', action='list')}">deaths</a></li>
         </ul>
     </div>
     <div id="content">
