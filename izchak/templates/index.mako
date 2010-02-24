@@ -8,7 +8,8 @@
 <p><a href="http://www.nethack.org/">NetHack</a> is a decades-old terminal game.  It's complicated and unforgiving.  And it's great.  Wikipedia has a <a href="http://en.wikipedia.org/wiki/NetHack">good overview</a>.</p>
 
 <h1>Playing</h1>
-<p>You can play on my server by telnetting to <code>nethack.veekun.com</code>.  If you're on Linux, OS X, or any other Unix derivative, built-in <code>telnet</code> ought to work fine.  If you're on Windows, your best bet is <a href="http://nethack.wikia.com/wiki/PuTTY">PuTTY</a>.</p>
+<p>You can either telnet or SSH to <code>nethack.veekun.com</code>.  The SSH username/password are <code>nethack:nethack</code>, the server fingerprint is <code>be:8b:2b:81:19:29:c3:b1:f8:b1:e5:84:5c:3c:35:2c</code>, and there's a <a href="/nethack.veekun.com.id_rsa">private key (with no passphrase)</a> you can use.</p>
+<p>If you're on Linux, OS X, or any other Unix derivative, you can use your built-in <code>telnet</code> or <code>ssh</code>.  If you're on Windows, your best bet is <a href="http://nethack.wikia.com/wiki/PuTTY">PuTTY</a>.</p>
 <p>If you're enjoying yourself, swing by <a href="irc://irc.veekun.com/cafe">irc.veekun.com #cafe</a>, our general gaming channel, and enjoy our NetHack death-reporting bot.  It's like Rodney, but less useful!</p>
 
 <h1>Configuring</h1>
