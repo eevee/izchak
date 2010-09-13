@@ -7,7 +7,7 @@
     <img src="/icons/points.png" alt="">
     <a href="${url.current(recency='30', sort='points', sortdir='desc')}">Top games, past month</a> &bull;
     <a href="${url.current(recency='365', sort='points', sortdir='desc')}">Top games, past year</a> &bull;
-    <a href="${url.current(recency='all', sort='points', sortdir='desc')}">Top games, all time</a>
+    <a href="${url.current(recency='anytime', sort='points', sortdir='desc')}">Top games, all time</a>
 </p>
 <p>
     <img src="/icons/trophy.png" alt="">
