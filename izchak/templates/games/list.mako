@@ -40,7 +40,7 @@ ${h.form('', method='get')}
 </div>
 <p><input type="submit" value="Search"></p>
 
-% if any(True for field in c.form if field.data != field._default):
+% if any(True for field in c.form if field.data != field.default):
 <p><a href="${url(controller='games', action='list')}">Reset filtering</a></p>
 % endif
 ${h.end_form()}
